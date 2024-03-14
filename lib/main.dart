@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -8,18 +9,39 @@ import 'package:type_word/input_listener.dart';
 import 'package:type_word/theme_colors.dart';
 import 'package:type_word/typing_context.dart';
 import 'package:type_word/word_generator.dart';
+import 'package:type_word/word_model.dart';
+
+Word word = Word();
+List<Word> list = [];
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  String data = await loadWordList();
+  /*String data = await loadWordList();
   WordGenerator.initializeWordList(
     data.split('\n').map((word) => word.trim()).toList(),
+  );*/
+  var data = await loadPV();
+  var jsonFile = json.decode(data);
+  for (var entry in jsonFile.entries) {
+    /*print("KEY: ${entry.key}");
+    print("VALUE: ${entry.value}");*/
+    Word word = Word.fromJson(entry);
+    list.add(word);
+  }
+  word = list.first;
+  print("word: ${word.toMap()}");
+  WordGenerator.initializeWordList(
+    word.descriptions.first.split(' ').toList(),
   );
+
   runApp(const MyApp());
 }
 
 Future<String> loadWordList() async {
   return await rootBundle.loadString('assets/words.txt');
+}
+Future<String> loadPV() async {
+  return await rootBundle.loadString('assets/phrasal_verbs.json');
 }
 
 class MyApp extends StatelessWidget {
@@ -53,12 +75,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     duration: const Duration(milliseconds: 500),
   );
 
-  // Settings
-  WordListType wordListType = WordListType.top200;
-
   // Test-specific variables
   late int seed = 0;
-  late TypingContext typingContext = TypingContext(seed, wordListType);
+  late TypingContext typingContext = TypingContext(seed, word.descriptions.first.split(' ').length);
   String? timeLeft;
   int? wpm;
   Timer? timer;
@@ -80,7 +99,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   void refreshTypingContext() {
     seed = Random().nextInt(1 << 32 - 1);
-    typingContext = TypingContext(seed, wordListType);
+    typingContext = TypingContext(seed, word.descriptions.first.split(' ').length);
     timer?.cancel();
     timer = null;
     timeLeft = null;
@@ -161,7 +180,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     '.' * TypingContext.maxLineLength,
                     style: Theme.of(context)
                         .textTheme
-                        .headline4
+                        .headlineMedium
                         ?.copyWith(color: Colors.transparent),
                   ),
                 ),
@@ -197,11 +216,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                           },
                         ),
                         OutlinedButton.icon(
-                          label: Text('Top ${wordListType.count} words'),
+                          label: Text('Top ${word.toString()} words'),
                           icon: const Icon(Icons.notes),
                           onPressed: () {
                             setState(() {
-                              wordListType = wordListType.next;
+                              word = list.elementAt(list.indexOf(word) +1);
                               refreshTypingContext();
                             });
                           },
@@ -217,11 +236,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                           switchOutCurve: const Interval(0.5, 1.0),
                           layoutBuilder: (currentChild, previousChildren) {
                             return Stack(
+                              alignment: Alignment.topLeft,
                               children: [
                                 ...previousChildren,
                                 if (currentChild != null) currentChild,
                               ],
-                              alignment: Alignment.topLeft,
                             );
                           },
                           child: Column(
@@ -251,7 +270,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                   'Test completed',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .headline4
+                                      .headlineMedium
                                       ?.copyWith(
                                         color: Theme.of(context).hintColor,
                                       ),
@@ -372,7 +391,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     ],
                     style: Theme.of(context)
                         .textTheme
-                        .headline4
+                        .headlineMedium
                         ?.copyWith(color: Colors.transparent),
                   ),
                 ),
@@ -446,7 +465,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   ),
                 if (remainingWords.length > 1)
                   TextSpan(
-                    text: ' ' + remainingWords.skip(1).join(' '),
+                    text: ' ${remainingWords.skip(1).join(' ')}',
                     style: TextStyle(
                       color: Theme.of(context).hintColor,
                     ),

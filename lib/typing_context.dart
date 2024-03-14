@@ -19,7 +19,7 @@ class TypedWord {
 }
 
 class TypingContext {
-  TypingContext(this.seed, WordListType wordListType)
+  TypingContext(this.seed, int wordListType)
       : wordGenerator = WordGenerator(seed, wordListType) {
     for (int i = 0; i < wordBufferLength; i++) {
       addWord(wordGenerator.nextWord());
