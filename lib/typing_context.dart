@@ -19,11 +19,19 @@ class TypedWord {
 }
 
 class TypingContext {
-  TypingContext(this.seed, int wordListType)
-      : wordGenerator = WordGenerator(seed, wordListType) {
+  TypingContext(this.seed)
+      :
+        wordGenerator = WordGenerator(seed) {
+
+    int length = WordGenerator.words.length;
+    maxLineLength = length;
+    wordBufferLength = length;
+    print("#### maxLineLength: ${length}");
+
     for (int i = 0; i < wordBufferLength; i++) {
       addWord(wordGenerator.nextWord());
     }
+
   }
 
   final WordGenerator wordGenerator;
@@ -31,9 +39,8 @@ class TypingContext {
   final List<String> words = [];
   final Map<int, String> misspelledWords = {};
   final List<int> lineStarts = [];
-  static const int maxLineLength = 50;
-  static const int maxWordLength = 20;
-  static const int wordBufferLength = maxLineLength;
+  static int maxLineLength = 0;
+  static int wordBufferLength = 0;
   final int seed;
   String _enteredText = '';
 
@@ -42,7 +49,8 @@ class TypingContext {
     bool previouslyOvershot = _enteredText.length > currentWord.length;
     bool currentlyOvershot = value.length > currentWord.length;
 
-    if (value.length > maxWordLength) {
+    print("#### value: ${value}");
+    if (value.length > 20) {//LIMIT optional
       return;
     } else {
       int typedLength = getTypedLine(currentLineIndex)
@@ -80,9 +88,12 @@ class TypingContext {
     }
 
     if (currentWordIndex + wordBufferLength > lineStarts.length) {
-      for (int i = 0; i < wordBufferLength; i++) {
+
+      print("#### lineStarts.length: ${lineStarts.length}");
+      print("#### currentWordIndex  + wordBufferLength: ${currentWordIndex + wordBufferLength}");
+      /*for (int i = 0; i < wordBufferLength; i++) {
         addWord(wordGenerator.nextWord());
-      }
+      }*/
     }
   }
 

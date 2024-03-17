@@ -11,8 +11,6 @@ import 'package:type_word/typing_context.dart';
 import 'package:type_word/word_generator.dart';
 import 'package:type_word/word_model.dart';
 
-Word word = Word();
-List<Word> list = [];
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,16 +20,22 @@ void main() async {
   );*/
   var data = await loadPV();
   var jsonFile = json.decode(data);
+  List<Word> list = [];
   for (var entry in jsonFile.entries) {
     /*print("KEY: ${entry.key}");
     print("VALUE: ${entry.value}");*/
     Word word = Word.fromJson(entry);
     list.add(word);
   }
-  word = list.first;
+  Word word = list.first;
   print("word: ${word.toMap()}");
+  List<String> words = [];
+  word.descriptions.forEach((element) {
+    List<String> items = element.split(' ');
+    words.addAll(items);
+  });
   WordGenerator.initializeWordList(
-    word.descriptions.first.split(' ').toList(),
+    words,
   );
 
   runApp(const MyApp());
@@ -77,7 +81,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   // Test-specific variables
   late int seed = 0;
-  late TypingContext typingContext = TypingContext(seed, word.descriptions.first.split(' ').length);
+  late TypingContext typingContext = TypingContext(seed);
   String? timeLeft;
   int? wpm;
   Timer? timer;
@@ -98,8 +102,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   }
 
   void refreshTypingContext() {
-    seed = Random().nextInt(1 << 32 - 1);
-    typingContext = TypingContext(seed, word.descriptions.first.split(' ').length);
+    seed++;
+    typingContext = TypingContext(seed);
     timer?.cancel();
     timer = null;
     timeLeft = null;
@@ -215,16 +219,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                             });
                           },
                         ),
-                        OutlinedButton.icon(
-                          label: Text('Top ${word.toString()} words'),
-                          icon: const Icon(Icons.notes),
-                          onPressed: () {
-                            setState(() {
-                              word = list.elementAt(list.indexOf(word) +1);
-                              refreshTypingContext();
-                            });
-                          },
-                        ),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -245,8 +239,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                           },
                           child: Column(
                             key: ValueKey(seed),
-                            mainAxisSize: MainAxisSize.min,
+                            mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               if (typingContext.currentLineIndex > 0) ...{
                                 buildLine(typingContext.currentLineIndex - 1),
@@ -294,7 +289,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   Text _buildTitle(String text) {
     return Text(
       text,
-      style: Theme.of(context).textTheme.headline5?.copyWith(
+      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
             color: ThemeColors.green,
           ),
     );
@@ -310,7 +305,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         typingContext.getLine(nextLineStart),
         style: Theme.of(context)
             .textTheme
-            .headline4
+            .headlineMedium
             ?.copyWith(color: Theme.of(context).hintColor),
       ),
     );
@@ -348,7 +343,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 ),
             },
           ],
-          style: Theme.of(context).textTheme.headline4,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),
     );
@@ -471,7 +466,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     ),
                   ),
               ],
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
         ),
