@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:type_word/input_listener.dart';
 import 'package:type_word/theme_colors.dart';
+import 'package:type_word/features/practice/screens/category_selection_screen.dart';
 import 'package:type_word/typing_context.dart';
 import 'package:type_word/word_generator.dart';
 import 'package:type_word/word_model.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'another typing test',
       theme: ThemeData.dark(),
-      home: const HomePage(),
+      home: const CategorySelectionScreen(),
     );
   }
 }
