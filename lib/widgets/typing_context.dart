@@ -26,7 +26,7 @@ class TypingContext {
     int length = WordGenerator.words.length;
     maxLineLength = length;
     wordBufferLength = length;
-    print("#### maxLineLength: ${length}");
+    print("#### maxLineLength: $length");
 
     for (int i = 0; i < wordBufferLength; i++) {
       addWord(wordGenerator.nextWord());
@@ -49,7 +49,7 @@ class TypingContext {
     bool previouslyOvershot = _enteredText.length > currentWord.length;
     bool currentlyOvershot = value.length > currentWord.length;
 
-    print("#### value: ${value}");
+    print("#### value: $value");
     if (value.length > 20) {//LIMIT optional
       return;
     } else {

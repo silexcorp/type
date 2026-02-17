@@ -19,7 +19,7 @@ class WordGenerator {
       index = 0;
     }
     index++;
-    print("#### index: ${index}, word: ${WordGenerator.words[index]}");
+    print("#### index: $index, word: ${WordGenerator.words[index]}");
     return WordGenerator.words[index];
   }
 }

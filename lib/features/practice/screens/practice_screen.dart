@@ -50,8 +50,7 @@ class _PracticeViewState extends State<PracticeView> {
       final state = bloc.state;
 
       if (state is PracticeLoaded) {
-        if (event.logicalKey.keyLabel != null &&
-            event.logicalKey.keyLabel.length == 1 &&
+        if (event.logicalKey.keyLabel.length == 1 &&
             // Allow all printable characters (excluding ASCII control chars)
             !RegExp(r'[\x00-\x1F\x7F]').hasMatch(event.logicalKey.keyLabel) &&
             !event.isControlPressed && !event.isMetaPressed // Avoid shortcuts
