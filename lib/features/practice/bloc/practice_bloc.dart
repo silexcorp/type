@@ -119,10 +119,11 @@ class PracticeBloc extends Bloc<PracticeEvent, PracticeState> {
   void _onInputChanged(PracticeInputChanged event, Emitter<PracticeState> emit) {
     if (this.state is PracticeLoaded) {
       final currentState = this.state as PracticeLoaded;
-      bool isCorrect = currentState.currentWord.startsWith(event.input);
+      final normalizedInput = event.input.toLowerCase();
+      bool isCorrect = currentState.currentWord.startsWith(normalizedInput);
       
       emit(currentState.copyWith(
-        typedText: event.input,
+        typedText: normalizedInput,
         isCorrect: isCorrect,
       ));
     }
@@ -131,6 +132,7 @@ class PracticeBloc extends Bloc<PracticeEvent, PracticeState> {
   void _onSubmitWord(SubmitWord event, Emitter<PracticeState> emit) {
     if (this.state is PracticeLoaded) {
       final currentState = this.state as PracticeLoaded;
+      // Ensure specific comparison just in case, though typedText should be lowercased already
       if (currentState.typedText == currentState.currentWord) {
          final nextWord = _wordGenerator.nextWord();
          final translation = repository.getTranslation(nextWord);
