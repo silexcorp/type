@@ -52,7 +52,10 @@ class _PracticeViewState extends State<PracticeView> {
       if (state is PracticeLoaded) {
         if (event.logicalKey.keyLabel != null &&
             event.logicalKey.keyLabel.length == 1 &&
-            RegExp(r'[a-zA-Z]').hasMatch(event.logicalKey.keyLabel)) {
+            // Allow all printable characters (excluding ASCII control chars)
+            !RegExp(r'[\x00-\x1F\x7F]').hasMatch(event.logicalKey.keyLabel) &&
+            !event.isControlPressed && !event.isMetaPressed // Avoid shortcuts
+           ) {
           bloc.add(PracticeInputChanged(state.typedText + event.logicalKey.keyLabel));
         } else if (event.logicalKey == LogicalKeyboardKey.backspace) {
           if (state.typedText.isNotEmpty) {
