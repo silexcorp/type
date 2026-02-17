@@ -2,8 +2,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../../../typing_context.dart';
-import '../../../../word_generator.dart';
+import '../../../widgets/typing_context.dart';
+import '../../../widgets/word_generator.dart';
 import '../repository/word_repository.dart';
 
 // Events

@@ -63,9 +63,9 @@ dependencies:
 
 flutter_native_splash:
   #/Volumes/Alexander/SoftWare/flutter/bin/dart run flutter_native_splash:create
-  color: "#E5E5FF"
+  color: "#1E2225"
   image: assets/app/infinity.png
-  color_dark: "#E5E5FF"
+  color_dark: "#1E2225"
   image_dark: assets/app/infinity.png
 
   android_gravity: center
@@ -89,8 +89,8 @@ flutter_launcher_icons:
   web:
     generate: true
     image_path: "assets/app/logo.png"
-    background_color: "#FF101111"
-    theme_color: "#FF101111"
+    background_color: "#1E2225"
+    theme_color: "#1E2225"
 
 
 dev_dependencies:

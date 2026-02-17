@@ -1,5 +1,5 @@
 
-import 'package:type_word/word_model.dart';
+import 'package:type_word/widgets/word_model.dart';
 
 class WordGenerator {
 

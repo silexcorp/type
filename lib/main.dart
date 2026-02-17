@@ -5,12 +5,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:type_word/input_listener.dart';
-import 'package:type_word/theme_colors.dart';
+import 'package:type_word/widgets/input_listener.dart';
+import 'package:type_word/widgets/theme_colors.dart';
 import 'package:type_word/features/practice/screens/category_selection_screen.dart';
-import 'package:type_word/typing_context.dart';
-import 'package:type_word/word_generator.dart';
-import 'package:type_word/word_model.dart';
+import 'package:type_word/widgets/typing_context.dart';
+import 'package:type_word/widgets/word_generator.dart';
+import 'package:type_word/widgets/word_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,7 +1,7 @@
 
 import 'dart:math';
 
-import 'package:type_word/word_generator.dart';
+import 'package:type_word/widgets/word_generator.dart';
 
 class TypedWord {
   const TypedWord.correct(this.value)

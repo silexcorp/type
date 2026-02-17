@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../theme_colors.dart';
+import '../../../widgets/theme_colors.dart';
 import '../bloc/practice_bloc.dart';
 import '../repository/word_repository.dart';
 
