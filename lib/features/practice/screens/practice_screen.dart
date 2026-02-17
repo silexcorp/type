@@ -107,7 +107,7 @@ class _PracticeViewState extends State<PracticeView> {
                   children: [
                     Text(
                       'Words Typed: ${state.wordsTyped}',
-                      style: TextStyle(color: ThemeColors.green, fontSize: 16),
+                      style: const TextStyle(color: ThemeColors.green, fontSize: 16),
                     ),
                     const SizedBox(height: 40),
                     // Word Display
@@ -116,14 +116,14 @@ class _PracticeViewState extends State<PracticeView> {
                       children: [
                         Text(
                           state.currentWord,
-                          style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                          style: Theme.of(context).textTheme.displayLarge?.copyWith(
                               color: Colors.grey[800],
                               fontFamily: 'Courier', 
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
                           state.typedText,
-                          style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                          style: Theme.of(context).textTheme.displayLarge?.copyWith(
                             color: state.isCorrect ? ThemeColors.green : ThemeColors.red,
                             fontFamily: 'Courier',
                             fontWeight: FontWeight.bold

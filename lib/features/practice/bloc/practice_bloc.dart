@@ -101,6 +101,9 @@ class PracticeBloc extends Bloc<PracticeEvent, PracticeState> {
         return;
       }
       
+      // Shuffle words for random order
+      words.shuffle();
+      
       WordGenerator.initializeWordList(words);
       _wordGenerator = WordGenerator(0); // Seed 0
       
