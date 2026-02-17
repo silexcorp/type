@@ -1,39 +1,16 @@
 
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:type_word/widgets/input_listener.dart';
 import 'package:type_word/widgets/theme_colors.dart';
 import 'package:type_word/features/practice/screens/category_selection_screen.dart';
 import 'package:type_word/widgets/typing_context.dart';
 import 'package:type_word/widgets/word_generator.dart';
-import 'package:type_word/widgets/word_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  /*String data = await loadWordList();
-  WordGenerator.initializeWordList(
-    data.split('\n').map((word) => word.trim()).toList(),
-  );*/
-  /*var data = await loadPV();
-  var jsonFile = json.decode(data);
-  List<Word> list = [];
-  for (var entry in jsonFile.entries) {
-    *//*print("KEY: ${entry.key}");
-    print("VALUE: ${entry.value}");*//*
-    Word word = Word.fromJson(entry);
-    list.add(word);
-  }
-  Word word = list.first;
-  print("word: ${word.toMap()}");
-  List<String> words = [];
-  word.descriptions.forEach((element) {
-    List<String> items = element.split(' ');
-    words.addAll(items);
-  });*/
   WordGenerator.initializeWordList(
     [],
   );

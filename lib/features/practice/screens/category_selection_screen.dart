@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import '../../../widgets/theme_colors.dart';
+import 'package:type_word/widgets/theme_colors.dart';
 import 'practice_screen.dart';
 
 class CategorySelectionScreen extends StatelessWidget {

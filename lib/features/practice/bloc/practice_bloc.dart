@@ -2,9 +2,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../../widgets/typing_context.dart';
-import '../../../widgets/word_generator.dart';
-import '../repository/word_repository.dart';
+import 'package:type_word/features/practice/repository/word_repository.dart';
+import 'package:type_word/widgets/word_generator.dart';
 
 // Events
 abstract class PracticeEvent extends Equatable {

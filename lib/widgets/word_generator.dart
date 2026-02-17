@@ -1,6 +1,4 @@
 
-import 'package:type_word/widgets/word_model.dart';
-
 class WordGenerator {
 
   WordGenerator(this.seed);

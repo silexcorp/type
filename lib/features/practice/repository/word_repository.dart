@@ -1,8 +1,6 @@
 
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import '../../../widgets/word_model.dart';
-import '../../../widgets/word_generator.dart';
 
 class WordRepository {
   Map<String, String> _translations = {};

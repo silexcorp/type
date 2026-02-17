@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../widgets/theme_colors.dart';
-import '../bloc/practice_bloc.dart';
-import '../repository/word_repository.dart';
+import 'package:type_word/features/practice/bloc/practice_bloc.dart';
+import 'package:type_word/features/practice/repository/word_repository.dart';
+import 'package:type_word/widgets/theme_colors.dart';
 
 class PracticeScreen extends StatelessWidget {
   final String category;
