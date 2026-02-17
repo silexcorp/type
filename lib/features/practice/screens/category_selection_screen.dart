@@ -11,6 +11,7 @@ class CategorySelectionScreen extends StatelessWidget {
     'Verbs',
     'Nouns',
     'Phrasal Verbs',
+    'All Words',
     'Random'
   ];
 

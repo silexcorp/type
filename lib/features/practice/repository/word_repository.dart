@@ -10,7 +10,7 @@ class WordRepository {
 
   Future<void> loadTranslations() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/translations_es.json');
+      final String jsonString = await rootBundle.loadString('assets/words/translations_es.json');
       final Map<String, dynamic> jsonMap = json.decode(jsonString);
       _translations = jsonMap.map((key, value) => MapEntry(key, value.toString()));
     } catch (e) {
@@ -23,16 +23,22 @@ class WordRepository {
     String assetPath;
     switch (category.toLowerCase()) {
       case 'adjectives':
-        assetPath = 'assets/adjectives.txt';
+        assetPath = 'assets/words/adjectives.txt';
         break;
       case 'verbs':
-        assetPath = 'assets/verbs.txt';
+        assetPath = 'assets/words/verbs.txt';
         break;
       case 'nouns':
-        assetPath = 'assets/nouns.txt';
+        assetPath = 'assets/words/nouns.txt';
+        break;
+      case 'phrasal verbs':
+        assetPath = 'assets/words/phrasal-verbs.txt';
+        break;
+      case 'all words':
+        assetPath = 'assets/words/all_words.txt';
         break;
       default:
-        assetPath = 'assets/words.txt';
+        assetPath = 'assets/words/words.txt';
     }
 
     try {

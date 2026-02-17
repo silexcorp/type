@@ -40,6 +40,59 @@ dependencies:
   equatable: ^2.0.8
   #google_fonts: #^2.2.0
 
+  flutter_native_splash: ^2.4.7             #Android iOS       web
+  flutter_launcher_icons: ^0.14.4           #Android iOS macOS     Windows Linux
+
+
+  #dart pub global activate flutterfire_cli
+  #export PATH="$PATH":"$HOME/.pub-cache/bin"
+  #flutterfire configure
+
+  #flutter run -d web-server
+  #flutter run -d web-server --web-port=8080 --web-hostname=localhost
+
+  #flutter run -d chrome --dart-define-from-file=.env
+  #flutter build web --dart-define-from-file=.env
+
+  #flutter run --dart-define-from-file=.env
+  #flutter build apk --dart-define-from-file=.env
+  #flutter build appbundle --dart-define-from-file=.env
+
+  #flutter gen-l10n
+
+
+flutter_native_splash:
+  #/Volumes/Alexander/SoftWare/flutter/bin/dart run flutter_native_splash:create
+  color: "#E5E5FF"
+  image: assets/app/infinity.png
+  color_dark: "#E5E5FF"
+  image_dark: assets/app/infinity.png
+
+  android_gravity: center
+  fullscreen: true
+
+  android_12:
+    image: assets/app/logo.png
+    icon_background_color: "#1E2225"
+    image_dark: assets/app/logo.png
+    icon_background_color_dark: "#1E2225"
+
+  web: true
+
+flutter_launcher_icons:
+  #android: "launcher_icon"
+  # /Volumes/Alexander/SoftWare/flutter/bin/flutter pub run flutter_launcher_icons:main
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app/logo.png"
+  min_sdk_android: 16
+  web:
+    generate: true
+    image_path: "assets/app/logo.png"
+    background_color: "#FF101111"
+    theme_color: "#FF101111"
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -63,4 +116,5 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/
+    - assets/app/
+    - assets/words/

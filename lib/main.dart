@@ -18,12 +18,12 @@ void main() async {
   WordGenerator.initializeWordList(
     data.split('\n').map((word) => word.trim()).toList(),
   );*/
-  var data = await loadPV();
+  /*var data = await loadPV();
   var jsonFile = json.decode(data);
   List<Word> list = [];
   for (var entry in jsonFile.entries) {
-    /*print("KEY: ${entry.key}");
-    print("VALUE: ${entry.value}");*/
+    *//*print("KEY: ${entry.key}");
+    print("VALUE: ${entry.value}");*//*
     Word word = Word.fromJson(entry);
     list.add(word);
   }
@@ -33,19 +33,12 @@ void main() async {
   word.descriptions.forEach((element) {
     List<String> items = element.split(' ');
     words.addAll(items);
-  });
+  });*/
   WordGenerator.initializeWordList(
-    words,
+    [],
   );
 
   runApp(const MyApp());
-}
-
-Future<String> loadWordList() async {
-  return await rootBundle.loadString('assets/words.txt');
-}
-Future<String> loadPV() async {
-  return await rootBundle.loadString('assets/phrasal_verbs.json');
 }
 
 class MyApp extends StatelessWidget {
@@ -54,7 +47,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'another typing test',
+      title: 'Home',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: const CategorySelectionScreen(),
     );
