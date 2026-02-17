@@ -126,6 +126,10 @@ class PracticeBloc extends Bloc<PracticeEvent, PracticeState> {
         typedText: normalizedInput,
         isCorrect: isCorrect,
       ));
+
+      if (normalizedInput == currentState.currentWord) {
+        add(SubmitWord());
+      }
     }
   }
 

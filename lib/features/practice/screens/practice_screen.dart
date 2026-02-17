@@ -83,7 +83,15 @@ class _PracticeViewState extends State<PracticeView> {
         focusNode: _focusNode,
         autofocus: true,
         onKey: (event) => _handleKeyEvent(context, event),
-        child: BlocBuilder<PracticeBloc, PracticeState>(
+        child: BlocConsumer<PracticeBloc, PracticeState>(
+          listenWhen: (previous, current) {
+             return previous is PracticeLoaded && 
+                    current is PracticeLoaded && 
+                    current.wordsTyped > previous.wordsTyped;
+          },
+          listener: (context, state) {
+            SystemSound.play(SystemSoundType.click);
+          },
           builder: (context, state) {
             if (state is PracticeLoading) {
               return const Center(child: CircularProgressIndicator());
